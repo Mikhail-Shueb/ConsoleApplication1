@@ -1,0 +1,15 @@
+build_dir := "./build"
+# Portable CPU count: works on both Linux and macOS (nproc is not available on
+# macOS by default, but getconf is).
+jobs := `getconf _NPROCESSORS_ONLN`
+
+build:
+    mkdir -p {{build_dir}}
+    cmake -B {{build_dir}} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+    cmake --build {{build_dir}} --parallel {{jobs}}
+
+run: build
+    {{build_dir}}/sample
+
+clean:
+    rm -rf {{build_dir}}
