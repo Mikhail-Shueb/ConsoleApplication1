@@ -105,52 +105,112 @@ bool areOrthogonal(const Vec3& first, const Vec3& second, const Vec3& candidate)
         && std::abs(glm::dot(second, candidate)) < epsilon;
 }
 
-void printSquare(const std::string& name, const Mat4& model)
+void printSquareMatrix(const std::string& name, const Mat4& squareMatrix)
 {
-    const glm::vec4 square[] = {
-        glm::vec4(-0.5f, 0.5f, 0.0f, 1.0f),
-        glm::vec4(0.5f, 0.5f, 0.0f, 1.0f),
-        glm::vec4(0.5f, -0.5f, 0.0f, 1.0f),
-        glm::vec4(-0.5f, -0.5f, 0.0f, 1.0f)
-    };
-
     std::cout << name << "\n";
-    for (int i = 0; i < 4; ++i)
-        printVector("  vertex " + std::to_string(i + 1), Vec3(model * square[i]));
-}
-
-void exercise5()
-{
-    const Mat4 centerSquare(1.0f);
-    const Mat4 upperSquare = glm::translate(Mat4(1.0f), Vec3(2.0f, 1.0f, 0.0f))
-        * glm::rotate(Mat4(1.0f), glm::radians(45.0f), Vec3(0.0f, 0.0f, 1.0f));
-    const Mat4 lowerSquare = glm::translate(Mat4(1.0f), Vec3(-2.0f, -2.0f, 0.0f))
-        * glm::scale(Mat4(1.0f), Vec3(2.0f, 2.0f, 1.0f));
-
-    printMatrix("Center unit square matrix", centerSquare);
-    printSquare("Center square vertices", centerSquare);
-    printMatrix("Upper square matrix: T(2, 1) * Rz(45 degrees)", upperSquare);
-    printSquare("Upper square vertices", upperSquare);
-    printMatrix("Lower square matrix: T(-2, -2) * S(2)", lowerSquare);
-    printSquare("Lower square vertices", lowerSquare);
+    const char* vertexNames[] = { "A", "B", "C", "D" };
+    for (int col = 0; col < 4; ++col)
+    {
+        std::cout << "  Vertex " << vertexNames[col] << " (col " << (col + 1) << "): [ "
+                  << std::fixed << std::setprecision(4)
+                  << squareMatrix[col].x << ", "
+                  << squareMatrix[col].y << ", "
+                  << squareMatrix[col].z << ", "
+                  << squareMatrix[col].w << " ]\n";
+    }
 }
 
 void exercise4()
 {
+    std::cout << "--- Exercise 4: Orthogonal Vectors to a Plane ---\n";
+    std::cout << "Plane basis vectors: a = [1, 2, 3], b = [4, 5, 6]\n";
+    std::cout << "\n1) Analytical Computation:\n";
+    std::cout << "   Normal vector n_unnorm = a x b:\n";
+    std::cout << "     nx = (2*6 - 3*5) = 12 - 15 = -3\n";
+    std::cout << "     ny = -(1*6 - 3*4) = -(6 - 12) = 6\n";
+    std::cout << "     nz = (1*5 - 2*4) = 5 - 8 = -3\n";
+    std::cout << "   n_unnorm = [-3, 6, -3]\n";
+    std::cout << "   Magnitude: sqrt((-3)^2 + 6^2 + (-3)^2) = sqrt(54) = 3*sqrt(6) ~= 7.3485\n";
+    std::cout << "   Unit normal n = [-3/(3*sqrt(6)), 6/(3*sqrt(6)), -3/(3*sqrt(6))]\n";
+    std::cout << "                 = [-1/sqrt(6), 2/sqrt(6), -1/sqrt(6)] ~= [-0.4082, 0.8165, -0.4082]\n";
+    std::cout << "\n   Analytical Verification (Dot Products):\n";
+    std::cout << "     a . n = 1*(-1/sqrt(6)) + 2*(2/sqrt(6)) + 3*(-1/sqrt(6)) = (-1 + 4 - 3)/sqrt(6) = 0 (Orthogonal)\n";
+    std::cout << "     b . n = 4*(-1/sqrt(6)) + 5*(2/sqrt(6)) + 6*(-1/sqrt(6)) = (-4 + 10 - 6)/sqrt(6) = 0 (Orthogonal)\n";
+
     const Vec3 a(1.0f, 2.0f, 3.0f);
     const Vec3 b(4.0f, 5.0f, 6.0f);
     const Vec3 normal = orthogonalVector(a, b);
 
+    std::cout << "\n2) GLM Implementation Results:\n";
     printVector("a x b", glm::cross(a, b));
-    printVector("Unit normal", normal);
-    std::cout << "a dot normal: " << glm::dot(a, normal) << "\n";
-    std::cout << "b dot normal: " << glm::dot(b, normal) << "\n";
-    std::cout << "Orthogonal to both: " << std::boolalpha << areOrthogonal(a, b, normal) << "\n";
+    printVector("orthogonalVector(a, b)", normal);
+    std::cout << "a . normal = " << std::fixed << std::setprecision(4) << glm::dot(a, normal) << "\n";
+    std::cout << "b . normal = " << std::fixed << std::setprecision(4) << glm::dot(b, normal) << "\n";
+    std::cout << "areOrthogonal(a, b, normal): " << std::boolalpha << areOrthogonal(a, b, normal) << "\n";
 
+    std::cout << "\n3) 2D Cartesian Basis Test (X = [1,0,0], Y = [0,1,0]):\n";
     const Vec3 x(1.0f, 0.0f, 0.0f);
     const Vec3 y(0.0f, 1.0f, 0.0f);
-    printVector("X cross Y", orthogonalVector(x, y));
-    printVector("Y cross X", orthogonalVector(y, x));
+    const Vec3 normalXY = orthogonalVector(x, y);
+    printVector("orthogonalVector(X, Y)", normalXY);
+    std::cout << "areOrthogonal(X, Y, normalXY): " << std::boolalpha << areOrthogonal(x, y, normalXY) << "\n";
+
+    std::cout << "\n4) What happens if you swap vectors in orthogonalVector?\n";
+    const Vec3 swappedNormalAB = orthogonalVector(b, a);
+    const Vec3 swappedNormalYX = orthogonalVector(y, x);
+    printVector("orthogonalVector(b, a)", swappedNormalAB);
+    printVector("orthogonalVector(Y, X)", swappedNormalYX);
+    std::cout << "Conclusion: Swapping vectors negates the output unit vector (flips direction by 180 deg)\n"
+              << "because the cross product is anti-commutative: u x v = -(v x u).\n";
+}
+
+void exercise5()
+{
+    std::cout << "\n--- Exercise 5: 2D Square Matrix Encoding & Transformations ---\n";
+    std::cout << "Question 1: How to encode the center unit square via a matrix?\n";
+    std::cout << "Answer: As a 4x4 matrix where each column represents a vertex [x, y, z, 1]^T in homogeneous coordinates:\n";
+    std::cout << "  Col 1: Vertex A = [-0.5,  0.5, 0, 1]^T  (Top-Left)\n";
+    std::cout << "  Col 2: Vertex B = [ 0.5,  0.5, 0, 1]^T  (Top-Right)\n";
+    std::cout << "  Col 3: Vertex C = [ 0.5, -0.5, 0, 1]^T  (Bottom-Right)\n";
+    std::cout << "  Col 4: Vertex D = [-0.5, -0.5, 0, 1]^T  (Bottom-Left)\n\n";
+
+    // Encode unit square centered at origin with side 1 as a 4x4 matrix
+    const Mat4 centerSquare(
+        glm::vec4(-0.5f,  0.5f, 0.0f, 1.0f), // Col 0: Vertex A
+        glm::vec4( 0.5f,  0.5f, 0.0f, 1.0f), // Col 1: Vertex B
+        glm::vec4( 0.5f, -0.5f, 0.0f, 1.0f), // Col 2: Vertex C
+        glm::vec4(-0.5f, -0.5f, 0.0f, 1.0f)  // Col 3: Vertex D
+    );
+    printSquareMatrix("Center unit square matrix S (columns are vertices A, B, C, D):", centerSquare);
+
+    std::cout << "\nQuestion 2 & 3: Sequence of transformations to output remaining squares:\n";
+    std::cout << "1. Upper Square (center at (2, 1), side length 1):\n";
+    std::cout << "   - Diagram shows vertex A' at the top (0, 0.7071), B' at right, C' at bottom, D' at left.\n";
+    std::cout << "   - To move A from 135 deg to 90 deg, rotate by -45 deg (clockwise).\n";
+    std::cout << "   - Then translate by (2, 1, 0).\n";
+    std::cout << "   - Transformation: M_upper = T(2, 1, 0) * Rz(-45 deg)\n";
+
+    const Mat4 upperTransform = glm::translate(Mat4(1.0f), Vec3(2.0f, 1.0f, 0.0f))
+        * glm::rotate(Mat4(1.0f), glm::radians(-45.0f), Vec3(0.0f, 0.0f, 1.0f));
+    const Mat4 upperSquare = upperTransform * centerSquare;
+
+    printMatrix("\nUpper Transformation Matrix M_upper:", upperTransform);
+    printSquareMatrix("Transformed Upper Square (M_upper * S):", upperSquare);
+
+    std::cout << "\n2. Lower Square (center at (-2, -2), side length 2):\n";
+    std::cout << "   - Diagram shows vertex C'' at top-left, D'' at top-right, A'' at bottom-right, B'' at bottom-left.\n";
+    std::cout << "   - Side length increases from 1 to 2 -> Scale S(2, 2, 1).\n";
+    std::cout << "   - Vertex positions are inverted (A -> bottom-right, B -> bottom-left) -> Rotate Rz(180 deg).\n";
+    std::cout << "   - Then translate by (-2, -2, 0).\n";
+    std::cout << "   - Transformation: M_lower = T(-2, -2, 0) * Rz(180 deg) * S(2, 2, 1)\n";
+
+    const Mat4 lowerTransform = glm::translate(Mat4(1.0f), Vec3(-2.0f, -2.0f, 0.0f))
+        * glm::rotate(Mat4(1.0f), glm::radians(180.0f), Vec3(0.0f, 0.0f, 1.0f))
+        * glm::scale(Mat4(1.0f), Vec3(2.0f, 2.0f, 1.0f));
+    const Mat4 lowerSquare = lowerTransform * centerSquare;
+
+    printMatrix("\nLower Transformation Matrix M_lower:", lowerTransform);
+    printSquareMatrix("Transformed Lower Square (M_lower * S):", lowerSquare);
 }
 
 int main()
