@@ -20,7 +20,7 @@ const float THRESHOLD = (float)1.0e-5;
 
 bool vectorsEqual(const vec3& first, const vec3& second)
 {
-    return glm::length(first - second) < THRESHOLD;
+    return all(epsilonEqual(first, second, THRESHOLD));
 }
 
 
@@ -50,7 +50,7 @@ void ex1() {
     cout << "  j(i . k) - k(i . j) : " << to_string(right) << "\n";
 
     const bool equal = vectorsEqual(left, right);
-    std::cout << "Equal: " << std::boolalpha << equal << "\n";
+    cout << "Equal: " << boolalpha << equal << "\n\n";
 }
 
 // Exercise 2: Camera Coordinate Frame// -------------------------------------------------------------
@@ -173,14 +173,17 @@ void testRodriguesRotation(int testNum, const vec3& v, const vec3& a, float thet
 void ex3() {
     cout << "3. Implement the Rodrigues Rotation Formula using vectors.\n\n";
 
-    // Test 1: Rotate (1, 2, 3) around X-axis by 90 degrees
-    testRodriguesRotation(1, vec3(1, 2, 3), vec3(1, 0, 0), 90.0f, vec3(1, -3, 2));
+    // Test 1: Rotate (2, 3, 1) around axis (1, 1, 1) by 120 degrees
+    // (Cyclic coordinate shift (x, y, z) -> (z, x, y), all values in [1, 5])
+    testRodriguesRotation(1, vec3(2, 3, 1), vec3(1, 1, 1), 120.0f, vec3(1, 2, 3));
 
-    // Test 2: Rotate (2, 3, 4) around Y-axis by 90 degrees
-    testRodriguesRotation(2, vec3(2, 3, 4), vec3(0, 1, 0), 90.0f, vec3(4, 3, -2));
+    // Test 2: Rotate (1, 2, 3) around axis (1, 1, 1) by 240 degrees
+    // (Double cyclic shift (x, y, z) -> (y, z, x), all values in [1, 5])
+    testRodriguesRotation(2, vec3(1, 2, 3), vec3(1, 1, 1), 240.0f, vec3(2, 3, 1));
 
-    // Test 3: Rotate (3, 2, 1) around Z-axis by 180 degrees
-    testRodriguesRotation(3, vec3(3, 2, 1), vec3(0, 0, 1), 180.0f, vec3(-3, -2, 1));
+    // Test 3: Rotate (3, 4, 2) around axis (1, 1, 1) by 120 degrees
+    // (Cyclic shift (3, 4, 2) -> (2, 3, 4), all values in [1, 5])
+    testRodriguesRotation(3, vec3(3, 4, 2), vec3(1, 1, 1), 120.0f, vec3(2, 3, 4));
 }
 
 // Main // -------------------------------------------------------------
