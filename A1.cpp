@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
+#include <random>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
@@ -8,11 +9,49 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/string_cast.hpp>
 
+
 using namespace std;
 using namespace glm;
 
 const float THRESHOLD = (float)1.0e-5;
 
+
+// Exercise 1: triple product proposition// -------------------------------------------------------------
+
+bool vectorsEqual(const vec3& first, const vec3& second)
+{
+    return glm::length(first - second) < THRESHOLD;
+}
+
+
+vec3 generateVector() {
+    static mt19937 generator(2026);
+    uniform_real_distribution<float> distribution(1.0f, 5.0f);
+    return vec3(distribution(generator), distribution(generator), distribution(generator));
+}
+
+// i × (j × k) = j(i ⋅ k) − k(i ⋅ j)
+
+void ex1() {
+    cout << "1. Show that the triple product proposition is true using vectors: i x (j x k) = j(i . k) - k(i . j)\n\n";
+
+    vec3 i = generateVector();
+    vec3 j = generateVector();
+    vec3 k = generateVector();
+
+    cout << "  i: " << to_string(i) << "\n";
+    cout << "  j: " << to_string(j) << "\n";
+    cout << "  k: " << to_string(k) << "\n";
+
+    vec3 left = cross(i, cross(j, k));
+    vec3 right = j * dot(i, k) - k * dot(i, j);
+
+    cout << "  i x (j x k): " << to_string(left) << "\n";
+    cout << "  j(i . k) - k(i . j) : " << to_string(right) << "\n";
+
+    const bool equal = vectorsEqual(left, right);
+    std::cout << "Equal: " << std::boolalpha << equal << "\n";
+}
 
 // Exercise 2: Camera Coordinate Frame// -------------------------------------------------------------
 
@@ -149,6 +188,7 @@ void ex3() {
 int main() {
     cout << "\nAssignment A1: Math Challenge\n\n";
 
+    ex1();
     ex2();
     ex3();
 
