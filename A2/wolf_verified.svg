@@ -1,0 +1,21 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='-1 -1 2 2' width='800' height='800'>
+<rect x='-1' y='-1' width='2' height='2' fill='#18181b'/>
+<line x1='-1' y1='0' x2='1' y2='0' stroke='#333333' stroke-width='0.005'/>
+<line x1='0' y1='-1' x2='0' y2='1' stroke='#333333' stroke-width='0.005'/>
+<polygon points='-0.391866,0.0855855 0.0715211,0.206624 -0.270828,-0.377802' fill='#ef4444' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='0.363757,0.035448 -0.0996302,-0.0855921 0.242717,0.498835' fill='#3b82f6' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='0.199915,-0.00735 0.527579,0.0782372 0.734205,-0.0428014' fill='#f97316' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='0.199915,-0.00735 0.734205,-0.0428014 0.40654,-0.128389' fill='#f97316' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='-0.331346,-0.146113 -0.56304,-0.206633 -0.391866,0.0855807' fill='#10b981' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='-0.331346,-0.146113 -0.270824,-0.377806 -0.502517,-0.438328' fill='#eab308' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='-0.331346,-0.146113 -0.502517,-0.438328 -0.563039,-0.206635' fill='#eab308' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='-0.502518,-0.438332 -0.734212,-0.498852 -0.563039,-0.206638' fill='#ec4899' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<polygon points='-0.0641928,0.171171 -0.391858,0.0855884 -0.149775,0.498837' fill='#8b5cf6' stroke='#ffffff' stroke-width='0.004' fill-opacity='0.9'/>
+<text x='-0.197058' y='-0.0285308' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>1</text>
+<text x='0.168948' y='0.149564' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>2</text>
+<text x='0.46706' y='-0.0250757' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>3a</text>
+<text x='-0.428751' y='-0.089055' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>4</text>
+<text x='-0.416932' y='-0.29222' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>5</text>
+<text x='-0.599923' y='-0.381274' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>6</text>
+<text x='-0.201942' y='0.251865' fill='#ffffff' font-size='0.05' font-weight='bold' font-family='sans-serif' text-anchor='middle' dominant-baseline='central'>7</text>
+</svg>
