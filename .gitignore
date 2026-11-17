@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Do not ignore files inside libraries/ (needed for GLEW, GLFW, GLM, etc.)
+!libraries/
+!libraries/**
+libraries/**/*.exe
+

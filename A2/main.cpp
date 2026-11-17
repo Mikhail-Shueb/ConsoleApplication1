@@ -14,7 +14,21 @@
  * 5. Classe de abstracao TangramPiece:
  *    - A ordem de desenho das pecas e independente (pressione ESPACO para baralhar).
  * 6. Cores distintas para cada uma das 7 pecas.
- * ============================================================================
+ * =============================================================================
+ *  "Nós, abaixo assinados,
+ *  Mikhail Mohamed Shueb, n.º 104014, curso MEIC-A
+ *  [Nome do Estudante 2], n.º [xxxx], curso
+ *  declaramos, sob compromisso de honra, que o trabalho intitulado "[Título do Trabalho]", 
+ *  realizado no âmbito da unidade curricular Computacao Grafica para Jogos,
+ *  resultou da participação ativa dos seguintes elementos do grupo. Os contributos individuais foram:
+ *  Mikhail Shueb – Criação da iteração inicial e funcional do codigo;
+ *  [Nome do Estudante 2] – [descrição sucinta do contributo]
+ *  Declaramos que o trabalho é original e respeita as normas académicas em vigor.
+ *  Campos Taguspark IST, 17/11/2026
+ *  Assinaturas:Mikhail Shueb & [Nome do Estudante 2]"
+ *
+ *
+ *============================================================================
  */
 
 #include <GL/glew.h>
