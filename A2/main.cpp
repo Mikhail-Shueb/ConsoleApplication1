@@ -132,8 +132,22 @@ bool wireframeMode = false;
 std::vector<TangramPiece> tangramPieces;
 std::vector<TangramPiece> originalPieces;
 
+// Funcao para manter a proporcao 1:1 quadrada (Letterbox / Pillarbox)
+// Garante que o desenho em Clip Space [-1, 1] nao sofre qualquer distorcao
+// independentemente das dimensoes ou formato da janela.
+void updateViewport(int width, int height) {
+    if (height <= 0) height = 1;
+    if (width <= 0) width = 1;
+
+    int size = std::min(width, height);
+    int offsetX = (width - size) / 2;
+    int offsetY = (height - size) / 2;
+
+    glViewport(offsetX, offsetY, size, size);
+}
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    glViewport(0, 0, width, height);
+    updateViewport(width, height);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -193,6 +207,11 @@ int main() {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetKeyCallback(window, key_callback);
+
+    // Inicializa o viewport com aspect ratio 1:1 centrado
+    int initialWidth, initialHeight;
+    glfwGetFramebufferSize(window, &initialWidth, &initialHeight);
+    updateViewport(initialWidth, initialHeight);
 
     // 2. Inicializacao do GLEW
     glewExperimental = GL_TRUE;
