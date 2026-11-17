@@ -19,15 +19,15 @@
  * =============================================================================
  *  "Nós, abaixo assinados,
  *  Mikhail Mohamed Shueb, n.º 104014, curso MEIC-A
- *  [Nome do Estudante 2], n.º [xxxx], curso [curso]
+ *  Tomás Martins Ferreira, n.º 109881, curso MEIC-A
  *  declaramos, sob compromisso de honra, que o trabalho intitulado "Assignment 2 - 2D Tangram (#100 WOLF)", 
  *  realizado no âmbito da unidade curricular Computacao Grafica para Jogos,
  *  resultou da participação ativa dos seguintes elementos do grupo. Os contributos individuais foram:
  *  Mikhail Shueb – Criação da iteração inicial e funcional do codigo;
- *  [Nome do Estudante 2] – [descrição sucinta do contributo]
+ *  Tómás Ferreira – Correção de bugs, ajustes de transformações e refinamento do código.
  *  Declaramos que o trabalho é original e respeita as normas académicas em vigor.
  *  Campus Taguspark IST, 17/11/2026
- *  Assinaturas: Mikhail Shueb & [Nome do Estudante 2]"
+ *  Assinaturas: Mikhail Shueb & Tomás Ferreira"
  * =============================================================================
  * DECLARAÇÃO DE USO DE INTELIGÊNCIA ARTIFICIAL (Nível 1 - Uso Limitado)
  * =============================================================================
