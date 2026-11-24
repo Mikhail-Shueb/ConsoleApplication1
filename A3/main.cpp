@@ -293,12 +293,14 @@ int main() {
         testFile.close();
     }
 
-    std::shared_ptr<Mesh> meshSmallTri  = ModelLoader::loadModel(modelPathPrefix + "small_triangle.obj", "SmallTriangle");
-    std::shared_ptr<Mesh> meshMedTri    = ModelLoader::loadModel(modelPathPrefix + "medium_triangle.obj", "MediumTriangle");
-    std::shared_ptr<Mesh> meshLargeTri  = ModelLoader::loadModel(modelPathPrefix + "large_triangle.obj", "LargeTriangle");
-    std::shared_ptr<Mesh> meshSquare    = ModelLoader::loadModel(modelPathPrefix + "square.obj", "Square");
-    std::shared_ptr<Mesh> meshParall    = ModelLoader::loadModel(modelPathPrefix + "parallelogram.obj", "Parallelogram");
-    std::shared_ptr<Mesh> meshTable     = ModelLoader::loadModel(modelPathPrefix + "table.obj", "Table");
+    std::shared_ptr<Mesh> meshPiece1 = ModelLoader::loadModel(modelPathPrefix + "piece1.obj", "Piece1_LargeTri1");
+    std::shared_ptr<Mesh> meshPiece2 = ModelLoader::loadModel(modelPathPrefix + "piece2.obj", "Piece2_LargeTri2");
+    std::shared_ptr<Mesh> meshPiece3 = ModelLoader::loadModel(modelPathPrefix + "piece3.obj", "Piece3_Parallelogram");
+    std::shared_ptr<Mesh> meshPiece4 = ModelLoader::loadModel(modelPathPrefix + "piece4.obj", "Piece4_SmallTri1");
+    std::shared_ptr<Mesh> meshPiece5 = ModelLoader::loadModel(modelPathPrefix + "piece5.obj", "Piece5_Square");
+    std::shared_ptr<Mesh> meshPiece6 = ModelLoader::loadModel(modelPathPrefix + "piece6.obj", "Piece6_SmallTri2");
+    std::shared_ptr<Mesh> meshPiece7 = ModelLoader::loadModel(modelPathPrefix + "piece7.obj", "Piece7_MediumTri");
+    std::shared_ptr<Mesh> meshTable  = ModelLoader::loadModel(modelPathPrefix + "table.obj", "Table");
 
     // 5. Construcao do Grafo de Cena
     sceneRoot = std::make_shared<SceneNode>("Root");
@@ -315,13 +317,13 @@ int main() {
     glm::vec4 colPiece7(0.61f, 0.35f, 0.71f, 1.0f); // Roxo ametista
 
     std::vector<std::shared_ptr<SceneNode>> pieces;
-    pieces.push_back(std::make_shared<SceneNode>("Piece1_LargeTri1",  meshLargeTri, shader3D.get(), colPiece1));
-    pieces.push_back(std::make_shared<SceneNode>("Piece2_LargeTri2",  meshLargeTri, shader3D.get(), colPiece2));
-    pieces.push_back(std::make_shared<SceneNode>("Piece3a_Parallelo", meshParall,   shader3D.get(), colPiece3a));
-    pieces.push_back(std::make_shared<SceneNode>("Piece4_SmallTri1",  meshSmallTri, shader3D.get(), colPiece4));
-    pieces.push_back(std::make_shared<SceneNode>("Piece5_Square",     meshSquare,   shader3D.get(), colPiece5));
-    pieces.push_back(std::make_shared<SceneNode>("Piece6_SmallTri2",  meshSmallTri, shader3D.get(), colPiece6));
-    pieces.push_back(std::make_shared<SceneNode>("Piece7_MediumTri",  meshMedTri,   shader3D.get(), colPiece7));
+    pieces.push_back(std::make_shared<SceneNode>("Piece1_LargeTri1",  meshPiece1, shader3D.get(), colPiece1));
+    pieces.push_back(std::make_shared<SceneNode>("Piece2_LargeTri2",  meshPiece2, shader3D.get(), colPiece2));
+    pieces.push_back(std::make_shared<SceneNode>("Piece3a_Parallelo", meshPiece3, shader3D.get(), colPiece3a));
+    pieces.push_back(std::make_shared<SceneNode>("Piece4_SmallTri1",  meshPiece4, shader3D.get(), colPiece4));
+    pieces.push_back(std::make_shared<SceneNode>("Piece5_Square",     meshPiece5, shader3D.get(), colPiece5));
+    pieces.push_back(std::make_shared<SceneNode>("Piece6_SmallTri2",  meshPiece6, shader3D.get(), colPiece6));
+    pieces.push_back(std::make_shared<SceneNode>("Piece7_MediumTri",  meshPiece7, shader3D.get(), colPiece7));
 
     // As pecas sao filhas da mesa no Grafo de Cena: mover a mesa arrasta o Pickagram!
     for (auto& p : pieces) {
@@ -341,7 +343,7 @@ int main() {
     // Camara 2: Elevada a 50 graus ACIMA da mesa para vista aerea perfeita da Caixa no tampo
     glm::quat rotCam2 = glm::angleAxis(glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
                         glm::angleAxis(glm::radians(-50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    cameras[1] = Camera(glm::vec3(0.0f, 0.18f, 0.0f), 7.5f, rotCam2, true);
+    cameras[1] = Camera(glm::vec3(0.0f, 0.74f, 0.0f), 7.5f, rotCam2, true);
 
     int initialW, initialH;
     glfwGetFramebufferSize(window, &initialW, &initialH);

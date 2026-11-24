@@ -61,9 +61,9 @@ void AnimationManager::setupConfigurations() {
     // =========================================================================
     // CONFIGURACAO 1: CAIXA (BOX) - Quadrado fechado deitado no plano X-Z
     // =========================================================================
-    // As 7 pecas formam o quadrado perfeito de Tangram (lado 2*sqrt(2)),
-    // exatamente como no modelo FBX do Blender e na Fig. 1 do enunciado.
-    // Deitadas horizontalmente na mesa (plano X-Z) com altura yLevel.
+    // As 7 pecas oficiais de Pickagram formam o quadrado perfeito de Tangram (89mm x 89mm),
+    // deitadas horizontalmente na mesa (plano X-Z) com altura calibrada para que
+    // a base assente perfeitamente no tampo da mesa (Y = 0.0).
     glm::quat layFlat = glm::angleAxis(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
     auto makeBoxRot = [&](float angleZ_deg) -> glm::quat {
@@ -71,33 +71,33 @@ void AnimationManager::setupConfigurations() {
         return layFlat * rotZ;
     };
 
-    // Proporcoes exatas do Pickagram: 89mm x 89mm x 13mm (razao 13/89 ~ 0.146067)
-    // Em espaco canonico, lado = 2*sqrt(2) ~ 2.8284, espessura = 0.41314 -> meia-espessura = 0.206571
+    // Proporcoes exatas do Pickagram: 89mm x 89mm x 55mm (apice)/13mm (bordos)
+    // Em espaco canonico, lado = 2*sqrt(2) ~ 2.8284, meia-espessura do apice = 0.873952
     const float boxScale = wolfScale;
-    const float yLevel   = 0.206571f * boxScale; // Face inferior assenta exatamente em Y = 0.0 no tampo da mesa
+    const float yLevel   = 0.873952f * boxScale; // Face inferior assenta exatamente em Y = 0.0 no tampo da mesa
     const float hSqrt2   = 0.70710678f * boxScale;
     const float sqrt2    = 1.41421356f * boxScale;
 
-    // Peca 0: Triangulo Grande 1 (Peito)
-    boxConfig[0] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(-135.0f), glm::vec3(boxScale) };
+    // Peca 0: Triangulo Grande 1 (Peito) - ref (0, 0), rot +135 deg
+    boxConfig[0] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(135.0f), glm::vec3(boxScale) };
 
-    // Peca 1: Triangulo Grande 2 (Corpo)
-    boxConfig[1] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(-45.0f), glm::vec3(boxScale) };
+    // Peca 1: Triangulo Grande 2 (Corpo) - ref (0, 0), rot +45 deg
+    boxConfig[1] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(45.0f), glm::vec3(boxScale) };
 
-    // Peca 2: Paralelogramo 3a (Cauda)
-    boxConfig[2] = { glm::vec3(-hSqrt2, yLevel, -hSqrt2), makeBoxRot(0.0f), glm::vec3(boxScale) };
+    // Peca 2: Paralelogramo (Cauda) - ref (-sqrt2, -sqrt2), rot 0 deg (pos.x=ref.x, pos.z=-ref.y)
+    boxConfig[2] = { glm::vec3(-sqrt2, yLevel, sqrt2), makeBoxRot(0.0f), glm::vec3(boxScale) };
 
-    // Peca 3: Triangulo Pequeno 1 (Garganta)
-    boxConfig[3] = { glm::vec3(-hSqrt2, yLevel, hSqrt2), makeBoxRot(135.0f), glm::vec3(boxScale) };
+    // Peca 3: Triangulo Pequeno 1 (Garganta) - ref (hSqrt2, hSqrt2), rot -45 deg
+    boxConfig[3] = { glm::vec3(hSqrt2, yLevel, -hSqrt2), makeBoxRot(-45.0f), glm::vec3(boxScale) };
 
-    // Peca 4: Quadrado (Cabeca)
-    boxConfig[4] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(135.0f), glm::vec3(boxScale) };
+    // Peca 4: Quadrado (Cabeca) - ref (0, 0), rot -45 deg
+    boxConfig[4] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(-45.0f), glm::vec3(boxScale) };
 
-    // Peca 5: Triangulo Pequeno 2 (Focinho)
-    boxConfig[5] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(45.0f), glm::vec3(boxScale) };
+    // Peca 5: Triangulo Pequeno 2 (Focinho) - ref (0, 0), rot -135 deg
+    boxConfig[5] = { glm::vec3(0.0f, yLevel, 0.0f), makeBoxRot(-135.0f), glm::vec3(boxScale) };
 
-    // Peca 6: Triangulo Medio (Pata Dianteira)
-    boxConfig[6] = { glm::vec3(-sqrt2, yLevel, -sqrt2), makeBoxRot(-90.0f), glm::vec3(boxScale) };
+    // Peca 6: Triangulo Medio (Pata Dianteira) - ref (sqrt2, -sqrt2), rot +90 deg
+    boxConfig[6] = { glm::vec3(sqrt2, yLevel, sqrt2), makeBoxRot(90.0f), glm::vec3(boxScale) };
 }
 
 void AnimationManager::update(float deltaTime, bool keyLeftPressed, bool keyRightPressed) {
