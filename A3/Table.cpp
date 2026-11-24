@@ -2,7 +2,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 Table::Table(std::shared_ptr<Mesh> mesh, Shader* shader)
-    : position(0.0f, -0.075f, 0.0f) {
+    : position(0.0f, 0.0f, 0.0f) {
     // Cor elegante de madeira/ardosia escura para o tampo da mesa
     glm::vec4 tableColor(0.25f, 0.25f, 0.28f, 1.0f);
     node = std::make_shared<SceneNode>("Table", mesh, shader, tableColor);
@@ -38,7 +38,7 @@ void Table::moveWithMouse(float deltaX, float deltaY, const Camera& camera) {
 }
 
 void Table::resetPosition() {
-    position = glm::vec3(0.0f, -0.075f, 0.0f);
+    position = glm::vec3(0.0f, 0.0f, 0.0f);
     updateTransform();
 }
 

@@ -13,7 +13,7 @@ void Camera::orbit(float deltaX, float deltaY) {
     // Criamos as rotacoes elementares estritamente atraves de quaternioes:
     // - qPitch: roda em torno do eixo X local da camara (eixo horizontal do ecra)
     // - qYaw:   roda em torno do eixo Y local da camara (eixo vertical do ecra)
-    glm::quat qPitch = glm::angleAxis(-deltaY * sensitivity, glm::vec3(1.0f, 0.0f, 0.0f));
+    glm::quat qPitch = glm::angleAxis(deltaY * sensitivity, glm::vec3(1.0f, 0.0f, 0.0f));
     glm::quat qYaw   = glm::angleAxis(-deltaX * sensitivity, glm::vec3(0.0f, 1.0f, 0.0f));
 
     // Multiplicamos no espaco local da camara e normalizamos o quaterniao resultante:

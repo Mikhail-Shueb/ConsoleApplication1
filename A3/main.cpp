@@ -333,15 +333,15 @@ int main() {
     animManager->registerPieces(pieces);
 
     // 7. Inicializacao das 2 Camaras Orbitais
-    // Camara 1: Alinhada para ver o Lobo em pe confortavelmente
-    glm::quat rotCam1 = glm::angleAxis(glm::radians(-15.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
-                        glm::angleAxis(glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    cameras[0] = Camera(glm::vec3(0.0f, 1.2f, 0.0f), 10.5f, rotCam1, true);
+    // Camara 1: Alinhada para ver o Lobo em pe confortavelmente (angulo suave de cima para baixo)
+    glm::quat rotCam1 = glm::angleAxis(glm::radians(20.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
+                        glm::angleAxis(glm::radians(-15.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    cameras[0] = Camera(glm::vec3(0.0f, 1.5f, 0.0f), 8.5f, rotCam1, true);
 
-    // Camara 2: Elevada a 45 graus para ver o tampo da mesa e a Caixa perfeitamente
-    glm::quat rotCam2 = glm::angleAxis(glm::radians(-35.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
-                        glm::angleAxis(glm::radians(40.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    cameras[1] = Camera(glm::vec3(0.0f, 0.5f, 0.0f), 11.5f, rotCam2, true);
+    // Camara 2: Elevada a 50 graus ACIMA da mesa para vista aerea perfeita da Caixa no tampo
+    glm::quat rotCam2 = glm::angleAxis(glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
+                        glm::angleAxis(glm::radians(-50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    cameras[1] = Camera(glm::vec3(0.0f, 0.15f, 0.0f), 7.5f, rotCam2, true);
 
     int initialW, initialH;
     glfwGetFramebufferSize(window, &initialW, &initialH);
