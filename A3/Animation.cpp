@@ -71,8 +71,10 @@ void AnimationManager::setupConfigurations() {
         return layFlat * rotZ;
     };
 
+    // Proporcoes exatas do Pickagram: 89mm x 89mm x 13mm (razao 13/89 ~ 0.146067)
+    // Em espaco canonico, lado = 2*sqrt(2) ~ 2.8284, espessura = 0.41314 -> meia-espessura = 0.206571
     const float boxScale = wolfScale;
-    const float yLevel   = 0.1414f * boxScale; // Assenta perfeitamente no tampo da mesa
+    const float yLevel   = 0.206571f * boxScale; // Face inferior assenta exatamente em Y = 0.0 no tampo da mesa
     const float hSqrt2   = 0.70710678f * boxScale;
     const float sqrt2    = 1.41421356f * boxScale;
 

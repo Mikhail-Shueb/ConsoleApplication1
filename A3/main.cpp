@@ -341,7 +341,7 @@ int main() {
     // Camara 2: Elevada a 50 graus ACIMA da mesa para vista aerea perfeita da Caixa no tampo
     glm::quat rotCam2 = glm::angleAxis(glm::radians(-30.0f), glm::vec3(0.0f, 1.0f, 0.0f)) *
                         glm::angleAxis(glm::radians(-50.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    cameras[1] = Camera(glm::vec3(0.0f, 0.15f, 0.0f), 7.5f, rotCam2, true);
+    cameras[1] = Camera(glm::vec3(0.0f, 0.18f, 0.0f), 7.5f, rotCam2, true);
 
     int initialW, initialH;
     glfwGetFramebufferSize(window, &initialW, &initialH);
