@@ -26,15 +26,15 @@
  * =============================================================================
  *  "Nos, abaixo assinados,
  *  Mikhail Mohamed Shueb, n.º 104014, curso MEIC-A
- *  [Nome do Estudante 2], n.º [xxxx], curso [curso]
+ *  Tomás Ferreira, n.º 109881, curso MEIC-A
  *  declaramos, sob compromisso de honra, que o trabalho intitulado "Assignment 3 - 3D Pickagram",
  *  realizado no ambito da unidade curricular Computacao Grafica para Jogos,
  *  resultou da participacao ativa dos seguintes elementos do grupo. Os contributos individuais foram:
  *  Mikhail Shueb – Criacao da iteracao inicial e arquitetura do projeto;
- *  [Nome do Estudante 2] – [descricao sucinta do contributo]
+ *  Tomás Ferreira – Criacao Pickagrama no blender e refinamento do código.
  *  Declaramos que o trabalho e original e respeita as normas academicas em vigor.
- *  Campus Taguspark IST, 24/11/2026
- *  Assinaturas: Mikhail Shueb & [Nome do Estudante 2]"
+ *  Campus Taguspark IST, 27/11/2026
+ *  Assinaturas: Mikhail Shueb & Tomás Ferreira"
  * =============================================================================
  * DECLARACAO DE USO DE INTELIGENCIA ARTIFICIAL (Nivel 1 - Uso Limitado)
  * =============================================================================
